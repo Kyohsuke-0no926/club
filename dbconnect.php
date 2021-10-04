@@ -1,6 +1,6 @@
 <?php
 try {
-  $db = new PDO('mysql:host=us-cdbr-east-04.cleardb.com;dbname=heroku_4d0860ef942f6b0;host=127.0.0.1;charset=utf8','bebd1ac9c20308', 'e289300a');
+  $db = new PDO('mysql:host=us-cdbr-east-04.cleardb.com;dbname=heroku_4d0860ef942f6b0;charset=utf8','bebd1ac9c20308', 'e289300a');
   // $db = new PDO('mysql:dbname=mydb;host=localhost;charset=utf8','root', 'root');
 } catch (PDOException $e) {
   echo 'DB接続エラー: ' . $e->getMEssage();
