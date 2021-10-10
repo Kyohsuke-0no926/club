@@ -5,17 +5,23 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css?v=2">
   <title>サークル名簿</title>
 </head>
 <body>
-  <header>
-    <h1 class="font-weight-normal">サークル名簿</h1>
-  </header>
+<div id="wrap">
+<div id="head">
+  <h1 class="font-weight-normal">サークル名簿</h1>
+</div>
+
   <main>
+  <div class="container">
+  <div class="heading">
     <h2>サークルメンバー登録</h2>
+  </div>
     <form action="index_do.php" method="post">
-      <p>サークル名</p>
-      
+    <div class="itmes">
+      <div class="item"><p>サークル名</p></div>
       <select name="club_name">
         <option value="1">選択してください</option>
         <?php
@@ -29,22 +35,33 @@
         <option value="<?php print($club_name['name']); ?>"><?php print($club_name['name']); ?></option>
         <?php endfor ?>
       </select>
-      <p>学年</p>
-      <select name="grade">
-        <option value="未入力">選択してください</option>
-        <?php for ($i=1; $i<9; $i++): ?>
-        <option value="<?php print($i); ?>"><?php print($i); ?></option>
-        <?php endfor ?>
-      </select>
-      <p>性別:<input type="radio" name="gender" value="男"> 男性 |<input type="radio" name="gender" value="女"> 女性</p>
-      <p>学籍番号</p>
-      <input type="text" name="student_number">
-      <p>氏名</p>
-      <input type="text" id="my_name" name="my_name" maxlength="255">
-      <input type="submit">
+    </div>
+      <div class="items">
+        <div class="item"><p>学年</p></div>
+        <select name="grade">
+          <option value="未入力">選択してください</option>
+          <?php for ($i=1; $i<9; $i++): ?>
+          <option value="<?php print($i); ?>"><?php print($i); ?></option>
+          <?php endfor ?>
+        </select>
+      </div>
+      <div class="items">
+        <div class="item"><p>性別</p></div>
+        <p><input type="radio" name="gender" value="男"> 男性 |<input type="radio" name="gender" value="女"> 女性</p>
+      </div>
+      <div class="items">
+        <div class="item"><p>学籍番号</p></div>
+        <input type="text" name="student_number" class="input">
+      </div>
+      <div class="items">
+        <div class="item"><p>氏名</p></div>
+        <input type="text" id="my_name" name="my_name" class="input" maxlength="255">
+      </div>
+      <input type="submit" class="btn">
     </form>
-<a href="index.html">一覧へ</a>
-
+    <a class="link" href="index.html">一覧へ</a>
+  </div>
   </main>
+</div>
 </body>
 </html>

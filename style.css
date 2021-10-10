@@ -1,0 +1,169 @@
+#wrap {
+  width: 700px;
+  margin: 0 auto;
+  background-color: #eeeeee;
+  padding: 10px 10px 15px 10px;
+}
+
+#head {
+  height: 50px;
+  width: 100%;
+}
+
+.font-weight-normal {
+  text-align: center;
+}
+
+.course {
+  margin-top: 100px;
+  width: 100%;
+  font-size: 20px;
+}
+
+.clear {
+  clear: left;
+}
+
+.screen {
+  float: left;
+  width: 50%;
+  text-align: center;
+}
+
+.registration {
+  color: orange;
+}
+
+.browsing {
+  color: #00DD00;
+}
+
+.container {
+  width: 90%;
+  margin: 0 auto;
+}
+
+.heading {
+  padding-left: 10px;
+}
+
+.club-links {
+  width: 100%;
+}
+
+.club-link {
+  width: 50%;
+  float: left;
+  text-align: center;
+  font-size: 20px;
+}
+
+.club-link a {
+  color: 	#00EE00;
+}
+
+.club-link a:hover {
+  color: #00DD00;
+}
+
+.club-link:hover {
+  transition: all 0.2s;
+  opacity: 1;
+  cursor: default;
+  }
+
+.club-link:active {
+  position: relative;
+  top: 3px;
+  }
+
+.item {
+  font-size: 1rem;
+}
+
+.btn {
+  box-shadow: 0 5px black;
+  opacity: 0.8;
+  border-radius: 4px;
+  margin: 0 auto;
+  display: block;
+  padding: 0 10px;
+  }
+
+.btn:hover {
+  transition: all 1s;
+  opacity: 1;
+  cursor: pointer;
+  }
+
+.btn:active {
+  position: relative;
+  top: 5px;
+  box-shadow: none;
+  }
+
+.input {
+  padding: 2px;
+}
+
+.club-heading {
+  text-align: center;
+}
+
+.check {
+  font-size: 1rem;
+  height: 10px;
+}
+
+.subheading {
+  width: 100%;
+}
+
+.subheading h3{
+  float: left;
+  width: 50%;
+}
+
+.count {
+  text-align: right;
+  width: 50%;
+  float: right;
+}
+
+.figure {
+  margin: 0 auto;
+  width: 90%;
+  margin: 0 30px;
+}
+
+.edit {
+  color: #00DD00;
+}
+
+.delete {
+  color: red;
+}
+
+.link {
+  opacity: 0.8;
+  border-radius: 3px;
+  color: #00BFFF;
+  font-size: 1.2rem;
+  padding: 2px 10px;
+  display: inline-block;
+  }
+
+  .link:hover {
+  transition: all 0.2s;
+  opacity: 1;
+  cursor: default;
+  }
+
+  .link:active {
+  position: relative;
+  top: 3px;
+  }
+
+.left {
+  float: left;
+}

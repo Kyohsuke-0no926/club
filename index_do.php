@@ -5,16 +5,21 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css?v=2">
   <title>サークル名簿</title>
 </head>
 <body>
+  <div id="wrap">
+  <div id="head">
+    <h1 class="font-weight-normal">サークル名簿</h1>
+  </div>
   <main>
-  <h3>サークル名簿</h3>
-  <h2>登録確認</h2>
+  <div class="container">
+  <div class="heading">
+    <h2>登録確認</h2>
+  </div>
   <pre>
 <?php
-
-
 if (isset($_REQUEST['club_name']) && !is_numeric($_REQUEST['club_name']) && isset($_REQUEST['grade']) && is_numeric($_REQUEST['grade']) && isset($_REQUEST['gender']) && isset($_REQUEST['student_number']) && isset($_REQUEST['my_name'])):
 
   $club_name = $_REQUEST['club_name'];
@@ -33,27 +38,27 @@ if (isset($_REQUEST['club_name']) && !is_numeric($_REQUEST['club_name']) && isse
   $statement->execute(array($id, $grade, $gender, $student_number, $my_name));
   echo '情報が登録されました';
   ?>
-  
-  <p>サークル名: </p><?php print(htmlspecialchars($club_name, ENT_QUOTES)); ?>
-  <p>学年: </p><?php print(htmlspecialchars($grade, ENT_QUOTES)); ?>
-  <p>性別: </p><?php print(htmlspecialchars($gender, ENT_QUOTES)); ?>
-  <p>学籍番号: </p><?php print(htmlspecialchars($student_number, ENT_QUOTES)); ?>
-  <p>氏名: </p><?php print(htmlspecialchars($my_name, ENT_QUOTES)); ?>
+  <p class="check">サークル名: </p><?php print(htmlspecialchars($club_name, ENT_QUOTES)); ?>
+  <p class="check">学年: <?php print(htmlspecialchars($grade, ENT_QUOTES).' 年'); ?></p>
+  <p class="check">性別: <?php print(htmlspecialchars($gender, ENT_QUOTES)); ?></p>
+  <p class="check">学籍番号: <?php print(htmlspecialchars($student_number, ENT_QUOTES)); ?></p>
+  <p class="check">氏名: <?php print(htmlspecialchars($my_name, ENT_QUOTES)); ?></p>
   <?php
   $club_pages = $db->prepare('SELECT * FROM club_name WHERE name=?');
   $club_pages->execute(array($club_name));
   $club_page = $club_pages->fetch();
   ?>
   </pre>
-  <a href="member.php?id=<?php print($club_page['id']); ?>"><?php print($club_page['name']); ?>の一覧へ</a> |
+  <a class="left link" href="member.php?id=<?php print($club_page['id']); ?>"><?php print($club_page['name']); ?>の一覧へ</a> |
 <article>
 <?php else: echo 'エラーが起こりました。再度登録してください。'; ?>
   <?php endif ?>
-  <a href="index.php"><p>戻る</p></a>
+  <p><a class="link" href="index.php">戻る</a></p>
 </article>
 
 
-
+  </div>
   </main>
+  </div>
 </body>
 </html>
