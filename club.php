@@ -19,7 +19,8 @@
   </div>
   <?php
     print("バスケットボール部");
-    $sql = "insert into club_name (name) values (\"バスケットボール部\")";
+    $sql = "insert into club_name (id, name) values (3, \"バスケットボール部\")";
+    // $sql = "insert into club_name (name) values (\"バスケットボール部\")";
     $result = $db->query($sql);
     $sql = "SELECT * FROM club_name";
     if ($result = $db->query($sql)) {
