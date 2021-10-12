@@ -40,6 +40,10 @@
   <?php
     $charset_results = $db->query('SHOW VARIABLES LIKE "char%"');
   ?>
-  <?php print($charset_results); ?>
+  <?php
+    foreach ($charset_results as $row){
+      print($row);
+    }
+  ?>
 </body>
 </html>
