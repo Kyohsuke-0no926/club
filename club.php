@@ -33,7 +33,7 @@
   if ($result = $db->query($sql)) {
       // 連想配列を取得
       while ($row = $result->fetch_assoc()) {
-        $club_names[]= $row["name"];
+        $club_names[]= $row;
       }
       // 結果セットを閉じる
       $result->close();
