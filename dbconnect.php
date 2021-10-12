@@ -7,7 +7,14 @@
 // } catch (PDOException $e) {
 //   echo 'DB接続エラー: ' . $e->getMEssage();
 // }
-  $db = new mysqli('mysql:host=us-cdbr-east-04.cleardb.com','bebd1ac9c20308', 'e289300a', 'heroku_4d0860ef942f6b0');
+  $url = parse_url(getenv("CLEARDB_DATABASE_URL"));
+
+  $server = $url["host"];
+  $username = $url["user"];
+  $password = $url["pass"];
+  $db = substr($url["path"], 1);
+
+  $db = new mysqli($server, $username, $password, $db);
   if ($db->connect_error) {
   echo $db->connect_error;
   exit();
