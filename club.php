@@ -39,7 +39,7 @@
       $result->close();
   }
 
-  for ($i=1; $i<=$count['cnt']; $i++):
+  for ($i=0; $i<$count; $i++):
     // $club_names = $db->prepare('SELECT * FROM club_name WHERE id=?');
     // $club_names->execute(array($i));
     // $club_name = $club_names->fetch()
