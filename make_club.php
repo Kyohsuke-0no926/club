@@ -1,3 +1,4 @@
+<?php require('dbconnect.php') ?>
 <?php
   $sql = "insert into club_name (name) values (\"バスケットボール部\")";
   $result = $db->query($sql);
