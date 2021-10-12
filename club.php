@@ -18,27 +18,18 @@
     <h2>サークル</h2>
   </div>
   <?php
-    $sql = "SELECT * FROM club_name";
-    if ($result = $db->query($sql)) {
-      $count = $result->num_rows;
-      $result->close(); 
-    }
+    $counts = $db->query('SELECT COUNT(*) as cnt FROM club_name');
+    $count = $counts->fetch();
   ?>
   <div class="club-links">
   <?php
-  $sql = "SELECT * FROM club_name";
-  $club_names = [];
-  if ($result = $db->query($sql)) {
-      while ($row = $result->fetch_assoc()) {
-        $club_names[]= $row;
-      }
-      $result->close();
-  }
-
-  for ($i=0; $i<$count; $i++):
+  for ($i=1; $i<=$count['cnt']; $i++):
+    $club_names = $db->prepare('SELECT * FROM club_name WHERE id=?');
+    $club_names->execute(array($i));
+    $club_name = $club_names->fetch()
   ?>
   <div class="club-link">
-  <p><a href="member.php?id=<?php print($club_names[$i]['id']); ?>"><?php print($club_names[$i]['name']); ?></a></p>
+  <p><a href="member.php?id=<?php print($club_name['id']); ?>"><?php print($club_name['name']); ?></a></p>
   </div>
   <?php endfor ?>
   <div class="clear"></div>
