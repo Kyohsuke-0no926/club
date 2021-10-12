@@ -30,7 +30,7 @@
   <?php
   $sql = "SELECT * FROM club_name";
   $club_names = [];
-  if ($result = $mysqli->query($sql)) {
+  if ($result = $db->query($sql)) {
       // 連想配列を取得
       while ($row = $result->fetch_assoc()) {
         $club_names[]= $row["name"];
