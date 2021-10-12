@@ -18,18 +18,34 @@
     <h2>サークル</h2>
   </div>
   <?php
-    $counts = $db->query('SELECT COUNT(*) as cnt FROM club_name');
-    $count = $counts->fetch();
+    $sql = "SELECT * FROM club_name";
+    if ($result = $db->query($sql)) {
+      $count = $result->num_rows;
+      $result->close(); // 結果セットを閉じる
+    }
+    // $counts = $db->query('SELECT COUNT(*) as cnt FROM club_name');
+    // $count = $counts->fetch();
   ?>
   <div class="club-links">
   <?php
+  $sql = "SELECT * FROM club_name";
+  $club_names = [];
+  if ($result = $mysqli->query($sql)) {
+      // 連想配列を取得
+      while ($row = $result->fetch_assoc()) {
+        $club_names[]= $row["name"];
+      }
+      // 結果セットを閉じる
+      $result->close();
+  }
+
   for ($i=1; $i<=$count['cnt']; $i++):
-    $club_names = $db->prepare('SELECT * FROM club_name WHERE id=?');
-    $club_names->execute(array($i));
-    $club_name = $club_names->fetch()
+    // $club_names = $db->prepare('SELECT * FROM club_name WHERE id=?');
+    // $club_names->execute(array($i));
+    // $club_name = $club_names->fetch()
   ?>
   <div class="club-link">
-  <p><a href="member.php?id=<?php print($club_name['id']); ?>"><?php print($club_name['name']); ?></a></p>
+  <p><a href="member.php?id=<?php print($club_names[$i]['id']); ?>"><?php print($club_names[$i]['name']); ?></a></p>
   </div>
   <?php endfor ?>
   <div class="clear"></div>
@@ -37,13 +53,5 @@
   <a class="link" href="index.html">戻る</a>
   </div>
   </div>
-  <?php
-    $charset_results = $db->query('SHOW VARIABLES LIKE "char%"');
-  ?>
-  <?php
-    foreach ($charset_results as $row){
-      print($row["Variable_name"] . " " . $row["Value"]);
-    }
-  ?>
 </body>
 </html>

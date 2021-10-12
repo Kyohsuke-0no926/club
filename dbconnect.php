@@ -16,9 +16,9 @@
 
   $db = new mysqli($server, $username, $password, $db);
   if ($db->connect_error) {
-  echo $db->connect_error;
-  exit();
-} else {
-  $db->set_charset("utf8");
-}
+    echo $db->connect_error;
+    exit();
+  } else {
+    $db->set_charset("utf8");
+  }
 ?>
