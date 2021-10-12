@@ -22,4 +22,6 @@
     $db->set_charset("utf8");
   }
 
+  echo 'Your current character set is: ' . $db->character_set_name() . "\n";
+
 ?>
