@@ -42,7 +42,7 @@
   ?>
   <?php
     foreach ($charset_results as $row){
-      print($row);
+      print($row["Variable_name"] . " " . $row["Value"]);
     }
   ?>
 </body>
