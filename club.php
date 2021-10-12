@@ -18,7 +18,7 @@
     <h2>サークル</h2>
   </div>
   <?php
-    $print("バスケットボール部");
+    print("バスケットボール部");
     $sql = "insert into club_name (name) values (\"バスケットボール部\")";
     $result = $db->query($sql);
     $sql = "SELECT * FROM club_name";
