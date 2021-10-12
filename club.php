@@ -18,6 +18,8 @@
     <h2>サークル</h2>
   </div>
   <?php
+    $sql = "insert into club_name (id, name) values (1, \"バスケットボール部\")";
+    $result = $db->query($sql);
     $sql = "SELECT * FROM club_name";
     if ($result = $db->query($sql)) {
       $count = $result->num_rows;
