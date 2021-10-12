@@ -37,5 +37,9 @@
   <a class="link" href="index.html">戻る</a>
   </div>
   </div>
+  <?php
+    $charset_results = $db->query('SHOW VARIABLES LIKE "char%"');
+  ?>
+  <?php print($charset_results); ?>
 </body>
 </html>
