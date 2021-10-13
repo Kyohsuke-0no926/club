@@ -38,7 +38,7 @@ if (isset($_REQUEST['club_name']) && !is_numeric($_REQUEST['club_name']) && isse
   $statement->execute(array($id, $grade, $gender, $student_number, $my_name));
   echo '情報が登録されました';
   ?>
-  <p class="check">サークル名: </p><?php print(htmlspecialchars($club_name, ENT_QUOTES)); ?>
+  <p class="check">サークル名: <?php print(htmlspecialchars($club_name, ENT_QUOTES)); ?></p>
   <p class="check">学年: <?php print(htmlspecialchars($grade, ENT_QUOTES).' 年'); ?></p>
   <p class="check">性別: <?php print(htmlspecialchars($gender, ENT_QUOTES)); ?></p>
   <p class="check">学籍番号: <?php print(htmlspecialchars($student_number, ENT_QUOTES)); ?></p>
@@ -50,11 +50,11 @@ if (isset($_REQUEST['club_name']) && !is_numeric($_REQUEST['club_name']) && isse
   ?>
   </pre>
   <a class="left link" href="member.php?id=<?php print($club_page['id']); ?>"><?php print($club_page['name']); ?>の一覧へ</a> |
-<article>
+
 <?php else: echo 'エラーが起こりました。再度登録してください。'; ?>
   <?php endif ?>
-  <p><a class="link" href="index.php">戻る</a></p>
-</article>
+  <a class="link" href="index.php">戻る</a>
+
 
 
   </div>
