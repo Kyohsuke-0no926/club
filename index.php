@@ -1,4 +1,10 @@
-<?php require('dbconnect.php'); ?>
+<?php 
+  require('dbconnect.php'); 
+  if ($_SERVER['REQUEST_URI'] == "/"){
+    header('Location: index.html', true, 301);
+    exit();
+  }
+?>
 <!DOCTYPE html>
 <html lang="ja">
 <head>
