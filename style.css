@@ -77,16 +77,23 @@
   top: 3px;
   }
 
+.items {
+  margin-bottom: 10px;
+}
+
 .item {
   font-size: 1rem;
 }
 
+.error {
+  font-size: 90%;
+  color: red;
+  margin: 0;
+}
+
 .btn {
-  box-shadow: 0 5px black;
   opacity: 0.8;
   border-radius: 4px;
-  margin: 0 auto;
-  display: block;
   padding: 0 10px;
   }
 
@@ -112,7 +119,13 @@
 
 .check {
   font-size: 1rem;
-  height: 10px;
+  padding-bottom: 25px;
+}
+
+
+.thank {
+  text-align: center;
+  padding-top: 100px;
 }
 
 .subheading {

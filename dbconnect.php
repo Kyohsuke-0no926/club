@@ -4,4 +4,5 @@
   } catch (PDOException $e) {
     echo 'DB接続エラー: ' . $e->getMEssage();
   }
+  ini_set('error_reporting', E_COMPILE_ERROR | E_RECOVERABLE_ERROR | E_ERROR | E_CORE_ERROR);
 ?>

@@ -1,11 +1,43 @@
-<?php require('dbconnect.php'); ?>
+<?php
+session_start();
+require('dbconnect.php');
+
+if (!isset($_SESSION['join'])) {
+  header('Location: update.php');
+  exit();
+}
+
+$name_id = $_SESSION['join']['id'];
+$club_name = $_SESSION['join']['club_name'];
+$grade = $_SESSION['join']['grade'];
+$gender = $_SESSION['join']['gender'];
+$student_number = $_SESSION['join']['student_number'];
+$first_name = $_SESSION['join']['first_name'];
+$last_name = $_SESSION['join']['last_name'];
+
+if (!empty($_POST)) {
+  $club_ids = $db->prepare('SELECT * FROM club_name WHERE club_name.name=?');
+  $club_ids->execute(array($club_name));
+  $club_id = $club_ids->fetch();
+  $id = $club_id['id'];
+
+  $statement = $db->prepare('UPDATE club SET club_id=?, grade=?, gender=?, student_number=?, first_name=? ,last_name=? WHERE id=?');
+  $statement->execute(array($id, $grade, $gender, $student_number, $first_name, $last_name, $name_id));
+
+  header('Location: thanks.php');
+  exit();
+}
+function h($value) {
+  return htmlspecialchars($value, ENT_QUOTES);
+}
+?>
 <!DOCTYPE html>
 <html lang="ja">
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="style.css?v=2">
+  <link rel="stylesheet" href="style.css">
   <title>サークル名簿</title>
 </head>
 <body>
@@ -19,79 +51,23 @@
   <h2>編集確認</h2>
 </div>
 
-<?php
-$name_id = $_REQUEST['id'];
 
-    if (isset($_REQUEST['club_name']) && !is_numeric($_REQUEST['club_name']) && isset($_REQUEST['grade']) && is_numeric($_REQUEST['grade']) && isset($_REQUEST['gender']) && isset($_REQUEST['student_number']) && isset($_REQUEST['my_name'])):
-      $club_name = $_REQUEST['club_name'];
-      $grade = $_REQUEST['grade'];
-      $gender = $_REQUEST['gender'];
-      $student_number = $_REQUEST['student_number'];
-      $student_number = mb_convert_kana($student_number, 'a', 'UTF-8');
-      $my_name = $_REQUEST['my_name'];
-
-$club_ids = $db->prepare('SELECT * FROM club_name WHERE club_name.name=?');
-$club_ids->execute(array($club_name));
-$club_id = $club_ids->fetch();
-$id = $club_id['id'];
-
-$statement = $db->prepare('UPDATE club SET club_id=?, grade=?, gender=?, student_number=?, my_name=? WHERE id=?');
-$statement->execute(array($id, $grade, $gender, $student_number, $my_name, $name_id));
-echo '情報が編集されました';
-?>
-
-<p>サークル名: </p><?php print(htmlspecialchars($club_name, ENT_QUOTES)); ?>
-<p>学年: </p><?php print(htmlspecialchars($grade, ENT_QUOTES)); ?>
-<p>性別: </p><?php print(htmlspecialchars($gender, ENT_QUOTES)); ?>
-<p>学籍番号: </p><?php print(htmlspecialchars($student_number, ENT_QUOTES)); ?>
-<p>氏名: </p><?php print(htmlspecialchars($my_name, ENT_QUOTES)); ?>
-
-
-<?php
-    if (isset($_REQUEST['id']) && is_numeric($_REQUEST['id'])):
-        $id = $_REQUEST['id'];
-  
-        $clubs = $db->prepare('SELECT * FROM club_name, club WHERE club.id=? and club.club_id=club_name.id');
-        $clubs->execute(array($id));
-        $club = $clubs->fetch();
-      ?>
-      <table class="figure" border="1">
-        <tr>
-          <th>サークル名</th>
-          <th>学年</th>
-          <th>性別</th>
-          <th>学籍番号</th>
-          <th>氏名</th>
-        </tr>
-        <tr>
-          <th><?php print($club['name']); ?></th>
-          <th><?php print($club['grade']); ?></th>
-          <th><?php print($club['gender']); ?></th>
-          <th><?php print($club['student_number']); ?></th>
-          <th><?php print($club['my_name']); ?></th>
-        </tr>
-      </table>
-    <?php endif ?>
-
-
+<form action="" method="post">
+  <input type="hidden" name="action" value="submit">
+  <h3 class="check">サークル名: <?php echo h($club_name); ?></h3>
+  <h3 class="check">学年: <?php echo h($grade). ' '. '年'; ?></h3>
+  <h3 class="check">性別: <?php echo h($gender); ?></h3>
+  <h3 class="check">学籍番号: <?php echo h($student_number); ?></h3>
+  <h3 class="check">氏名: <?php echo h($first_name). ' '. h($last_name); ?></h3>
 
 <?php
 $club_pages = $db->prepare('SELECT * FROM club_name WHERE name=?');
 $club_pages->execute(array($club_name));
 $club_page = $club_pages->fetch();
 ?>
-</pre>
+<div><a class="link" href="update.php?id=<?php echo h($_SESSION['join']['id']); ?>">&laquo;&nbsp;書き直す</a> | <input type="submit" class="btn" value="再登録する"></div>
+</form>
 
-<article>
-<a class="left link" href="member.php?id=<?php print($club_page['id']); ?>"><?php print($club_page['name']); ?>の一覧へ</a><p> | <a class="right link" href="update.php?id=<?php print($name_id); ?>">戻る</a></p>
-
-<?php else: echo 'エラーが起こりました。再度編集してください。'; ?>
-<p><a class="link" href="update.php?id=<?php print($name_id); ?>">戻る</a></p>
-
-<?php endif ?>
-
-
-</article>
 </div>
 </div>
 </main>

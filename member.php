@@ -1,4 +1,10 @@
-<?php require('dbconnect.php'); ?>
+<?php
+require('dbconnect.php');
+
+function h($value) {
+  return htmlspecialchars($value, ENT_QUOTES);
+}
+?>
 <!doctype html>
 <html lang="ja">
 <head>
@@ -24,7 +30,7 @@ $clubs->execute(array($id));
 $club = $clubs->fetch()
 ?>
 <div class="club-heading">
-  <h2><?php print($club['name']); ?></h2>
+  <h2><?php echo h($club['name']); ?></h2>
 </div>
 <div class="subheading">
 <h3>メンバー一覧</h3>
@@ -34,7 +40,7 @@ $counts = $db->prepare('SELECT COUNT(*) AS cnt FROM club WHERE club_id=?');
 $counts->execute(array($id));
 $count = $counts->fetch()
 ?>
-<p class="count">人数: <?php print($count['cnt']); ?>人</p>
+<p class="count">人数: <?php echo h($count['cnt']); ?>人</p>
 </div>
 
 <table class="figure" border="1">
@@ -53,14 +59,14 @@ $club_names = $db->prepare('SELECT * FROM club_name, club WHERE club_name.id=? A
 $club_names->execute(array($id));
   while ($club_name = $club_names->fetch()):?>
   <tr>
-    <th> <?php print($i); ?></th>
+    <th> <?php echo($i); ?></th>
     <?php $i++; ?>
-    <th><?php print($club_name['grade']); ?></th>
-    <th><?php print($club_name['gender']); ?></th>
-    <th><?php print($club_name['student_number']); ?></th>
-    <th><?php print($club_name['my_name']); ?></th>
-    <th><a class="edit" href="update.php?id=<?php print($club_name['id']); ?>">編集</a></th>
-    <th><a class="delete" href="delete.php?id=<?php print($club_name['id']); ?>">削除</a></th>
+    <th><?php echo h($club_name['grade']); ?></th>
+    <th><?php echo h($club_name['gender']); ?></th>
+    <th><?php echo h($club_name['student_number']); ?></th>
+    <th><?php echo h($club_name['first_name']). ' '. h($club_name['last_name']); ?></th>
+    <th><a class="edit" href="update.php?id=<?php echo h($club_name['id']); ?>">編集</a></th>
+    <th><a class="delete" href="delete.php?id=<?php echo h($club_name['id']); ?>">削除</a></th>
   </tr>
   <?php endwhile ?>
 </table>
